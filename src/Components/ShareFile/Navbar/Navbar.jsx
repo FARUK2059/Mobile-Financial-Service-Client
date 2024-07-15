@@ -36,12 +36,11 @@ const Navbar = () => {
                             {navMenu}
                         </ul>
                     </div>
-                    <div className="navbar-end">
+                    <div className="navbar-end mr-4">
                         {/* {
                             user ? <Link className="btn">{profile}</Link> : <Link to="login" className="btn">Join Us</Link>
                         } */}
-                        {/* <button className="btn btn-warning">Registation</button> */}
-                        <button className="btn btn-warning">Sign Up</button>
+                        <Link to="login"><button className="btn btn-warning">Login</button></Link>
 
 
                     </div>
