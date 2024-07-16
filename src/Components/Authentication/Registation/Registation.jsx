@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useAxios from "../../../Hooks/AxiosPublic/useAxios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const Registration = () => {
     const axioss = useAxios();
@@ -99,6 +100,15 @@ const Registration = () => {
 
     return (
         <div>
+            {/* Dynamic titlee section */}
+            <div>
+                <div>
+                    <Helmet>
+                        <title> Registation | ReadyPay</title>
+                    </Helmet>
+                </div>
+            </div>
+
             <section className="relative py-10 bg-gray-900 sm:py-16 lg:py-24">
                 <div className="absolute inset-0">
                     <img

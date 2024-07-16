@@ -5,6 +5,7 @@ import Home from "../Components/HomePage/Home";
 import Root from "./Root";
 import Login from "../Components/Authentication/Login/Login";
 import Registation from "../Components/Authentication/Registation/Registation";
+import SendMony from "../Components/UserDashboard/SendMony/SendMony";
 
 
 const Router = createBrowserRouter([
@@ -24,6 +25,12 @@ const Router = createBrowserRouter([
             {
                 path: "login",
                 element: <Login></Login>
+            },
+
+            // User dashboard path
+            {
+                path: "sendmony",
+                element: <SendMony></SendMony>
             }
         ]
     },

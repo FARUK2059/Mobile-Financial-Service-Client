@@ -1,7 +1,19 @@
-import { Link } from "react-router-dom";
+
+// import { useRef } from "react";
+
+import { useRef } from "react";
+import SendMony from "./SendMony/SendMony";
 
 
 const UserService = () => {
+    const modalRef = useRef(null);
+
+    const handleCloseModal = () => {
+        if (modalRef.current) {
+            modalRef.current.close();
+        }
+    };
+
     return (
         <div>
             <section className="py-10 bg-gray-100 sm:py-16 lg:py-24">
@@ -21,11 +33,25 @@ const UserService = () => {
 
                                 <h2 className="mt-6 text-3xl font-bold">Per send money transection cost only 5 TK</h2>
 
-                                <Link
+                                {/* <Link to="/sendmony"
                                     className="mt-8 inline-block w-full rounded-full bg-pink-600 py-4 text-sm font-bold text-white shadow-xl"
                                 >
                                     Send Money
-                                </Link>
+                                </Link> */}
+                                <button className="mt-8 inline-block w-full rounded-full bg-pink-600 py-4 text-sm font-bold text-white shadow-xl" onClick={() => modalRef.current.showModal()}  >Send Money</button>
+                                <dialog id="my_modal_5" ref={modalRef} className="modal modal-bottom sm:modal-middle bg-fuchsia-500">
+                                    <div className="modal-box bg-white">
+                                        <div>
+                                            <SendMony onSuccess={handleCloseModal} ></SendMony>
+                                        </div>
+                                        <div className="modal-action">
+                                            <form method="dialog">
+                                                {/* if there is a button in form, it will close the modal */}
+                                                <button className="btn btn-primary">Close</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </dialog>
                             </div>
                         </section>
 
@@ -63,7 +89,7 @@ const UserService = () => {
                             </div>
                         </section>
 
-                        
+
                     </div>
                 </div>
             </section>
