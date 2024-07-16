@@ -1,19 +1,73 @@
 import { Link, NavLink } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
 
 import MFS from '../../../assets/MFS Icon.png'
+import { useAuth } from "../../Authentication/AuthProvider/AuthProvider";
+import { toast } from "react-toastify";
+import useAxios from "../../../Hooks/AxiosPublic/useAxios";
 
 
 const Navbar = () => {
 
+    const { token } = useAuth();
+    const axioss = useAxios();
+
     const navMenu = <>
 
-        
+
         <li><NavLink to="/" > Service </NavLink></li>
         <li><NavLink to="/" > Offers </NavLink></li>
         <li><NavLink to="/" > About Us </NavLink></li>
         <li><NavLink to="/" > Help </NavLink></li>
 
     </>
+
+    // const handleSignOut = () => {
+    //     logout()
+    //         .then(() => {
+    //             toast.success('LogOut successful!');
+    //         })
+    //         .catch()
+    // }
+
+    const handleSignOut = () => {
+        axioss.post('/logout', {}, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+            .then(() => {
+                localStorage.removeItem('token');
+                toast.success('LogOut successful!');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            })
+            .catch((error) => {
+                console.error('Logout error:', error);
+                toast.error('Failed to log out!');
+            });
+    };
+
+    const profile = <>
+        <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                    <img alt="null" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThRyukDe4q5dJpXgg5nIegQYQf66HXPGm57S_9EpJYbZtm0WP0R29sB9gxyUJZEqTew7Y&usqp=CAU" />
+                    <FaUserCircle />
+                </div>
+            </div>
+            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-blue-300 text-black rounded-box w-52">
+                <li>
+                    <a className="justify-center text-blue-500"> Dashboard </a>
+                </li>
+                <li><Link to="/deshoard" >Overview</Link></li>
+                <li><Link onClick={handleSignOut}>Logout</Link></li>
+            </ul>
+        </div>
+    </>
+
+
 
 
     return (
@@ -37,10 +91,10 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className="navbar-end mr-4">
-                        {/* {
-                            user ? <Link className="btn">{profile}</Link> : <Link to="login" className="btn">Join Us</Link>
-                        } */}
-                        <Link to="login"><button className="btn btn-warning">Login</button></Link>
+                        {
+                            token ? <Link className="btn">{profile}</Link> : <Link to="login"><button className="btn btn-warning">Login</button></Link>
+                        }
+
 
 
                     </div>

@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../../Authentication/AuthProvider/AuthProvider";
 
 const Banner = () => {
+    const { token } = useAuth();
+
     return (
         <div>
             <section className="bg-blue-600 ">
@@ -12,9 +15,13 @@ const Banner = () => {
                                 <p className="mt-4 text-base text-gray-50">Transactions are most secure with ReadyPay. A 40 TK bonus is available only after user registration. Agents can receive a bonus of up to 10,000 TK upon registration.</p>
                                 <p className="text-sm text-right hover:text-yellow-300 lg:p-0 p-4">শর্ত প্রযোজ্য</p>
 
-                                <div className=" items-center mt-8 ">
-                                    <Link to="register"><button className="btn btn-warning">Registation</button></Link>
-                                </div>
+                                {
+                                    token ? null :
+                                        <div className=" items-center mt-8 ">
+                                            <Link to="register"><button className="btn btn-warning">Registation</button></Link>
+                                        </div>
+                                }
+
                             </div>
 
                             <div className="relative px-12">
