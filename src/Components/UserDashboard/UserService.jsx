@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import SendMony from "./SendMony/SendMony";
 import CashOut from "./CashOut/CashOut";
 import CashIn from "./Cashin/CashIn";
