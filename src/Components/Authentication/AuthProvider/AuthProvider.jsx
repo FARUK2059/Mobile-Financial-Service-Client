@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -23,35 +23,35 @@ const AuthProvider = ({ children }) => {
         }
     }, [token]);
 
-    const login = async (credentials) => {
-        try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(credentials),
-            });
+const login = async (credentials) => {
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(credentials),
+        });
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const data = await response.json();
-
-            if (data.token) {
-                setToken(data.token);
-                // navigate('/');
-            } else {
-                console.error('Login failed: ', data.message || 'No token received');
-                // Optionally, you can use alert or some UI feedback here
-                alert('Login failed. Please check your credentials.');
-            }
-        } catch (error) {
-            console.error('Login error: ', error);
-            alert('An error occurred. Please try again later.');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
-    };
+
+        const data = await response.json();
+
+        if (data.token) {
+            setToken(data.token);
+            // navigate('/');
+        } else {
+            console.error('Login failed: ', data.message || 'No token received');
+            // Optionally, you can use alert or some UI feedback here
+            alert('Login failed. Please check your credentials.');
+        }
+    } catch (error) {
+        console.error('Login error: ', error);
+        alert('An error occurred. Please try again later.');
+    }
+};
 
 
     return (
@@ -62,3 +62,6 @@ const AuthProvider = ({ children }) => {
 };
 
 export default AuthProvider;
+
+
+

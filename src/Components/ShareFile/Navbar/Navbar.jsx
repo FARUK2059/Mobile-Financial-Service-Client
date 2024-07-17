@@ -16,7 +16,7 @@ const Navbar = () => {
 
 
         <li><NavLink to="/" > Service </NavLink></li>
-        <li><NavLink to="/" > Offers </NavLink></li>
+        <li><NavLink to=""  > Offers </NavLink></li>
         <li><NavLink to="/" > About Us </NavLink></li>
         <li><NavLink to="/" > Help </NavLink></li>
 
@@ -41,7 +41,7 @@ const Navbar = () => {
                 toast.success('LogOut successful!');
                 setTimeout(() => {
                     window.location.reload();
-                }, 1000);
+                }, 400);
             })
             .catch((error) => {
                 console.error('Logout error:', error);
@@ -62,6 +62,7 @@ const Navbar = () => {
                     <a className="justify-center text-blue-500"> Dashboard </a>
                 </li>
                 <li><Link to="/deshoard" >Overview</Link></li>
+                <li><Link to="#sendmoney" href="#sendmoney1" >Send Money</Link></li>
                 <li><Link onClick={handleSignOut}>Logout</Link></li>
             </ul>
         </div>
